@@ -11,6 +11,13 @@ public class FractalNode {
         this.seed = seed;
     }
 
+    /**
+     * Processes part of the fractal generation by generating all of its copies.
+     * If the node is too small, its image will be drawn.
+     *
+     * @param scaleCap the scale at which iterating is stopped
+     * @param image    the image to draw the fractal on
+     */
     public void iterate(double scaleCap, FractalImage image) {
         if (scaleCap > this.transform.getScalar()) {
             image.drawNode(this.transform);

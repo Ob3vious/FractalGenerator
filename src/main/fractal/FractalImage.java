@@ -24,14 +24,19 @@ public class FractalImage {
         g.setPaint(foreground);
     }
 
+    /**
+     * Draws a shape with the given transform.
+     * @param transform the transform to apply to the shape.
+     */
     public void drawNode(Matrix transform) {
-        //Vector pos = new Vector(0, 0).applyMatrix();
         shape.drawTransform(g, transform);
-        //g.fillRect((int) pos.getX(), (int) pos.getY(), 1, 1);
-        //g.fillRect((int)Math.round(node.getX() - node.getSize()), (int)Math.round(node.getY() - node.getSize()), (int)Math.round(node.getSize() * 2), (int)Math.round(node.getSize() * 2));
-        //g.fillPolygon();
     }
 
+    /**
+     * Uploads the image file into the fractals folder.
+     * @param filename the name of the image file
+     * @throws IOException the exception that is thrown if uploading went wrong
+     */
     public void upload(String filename) throws IOException {
         ImageIO.write(img, "PNG", new File("fractals\\" + filename + ".png"));
     }

@@ -18,10 +18,23 @@ public class Matrix {
         return this.values.length;
     }
 
+    /**
+     * Gets a matrix item through row, then column.
+     *
+     * @param row    the row (0-indexed)
+     * @param column the column (0-indexed)
+     * @return the item at the intersection of the given row and column
+     */
     public double get(int row, int column) {
         return this.values[row][column];
     }
 
+    /**
+     * Applies a matrix multiplication. Ordered as (this * other)
+     *
+     * @param secondMatrix the matrix to multiply with
+     * @return the product of the two matrices, or null if there is none
+     */
     public Matrix multiplyBy(Matrix secondMatrix) {
         if (this.getWidth() != secondMatrix.getHeight()) {
             return null;
@@ -44,6 +57,6 @@ public class Matrix {
         // only the top left 2x2 of the 3x3 matrix is relevant for scaling as the third column is for shifting only
         return Math.abs(
                 this.get(0, 0) * this.get(1, 1)
-                - this.get(1, 0) * this.get(0, 1));
+                        - this.get(1, 0) * this.get(0, 1));
     }
 }

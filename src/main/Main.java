@@ -29,5 +29,6 @@ public class Main {
                 {0, 0, 1}}), seed);
 
         Fractal fractal = new Fractal(4096, node, 1);
+        fractal.upload("temp");
     }
 }

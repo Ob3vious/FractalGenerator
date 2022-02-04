@@ -15,6 +15,12 @@ public class Vector {
         return this.matrix.get(1, 0);
     }
 
+    /**
+     * Applies a matrix transform to the vector. Note that this changes this vector.
+     *
+     * @param secondMatrix the matrix to transform the vector by
+     * @return the vector resulting from the transformation
+     */
     public Vector applyMatrix(Matrix secondMatrix) {
         this.matrix = secondMatrix.multiplyBy(this.matrix);
         return this;
