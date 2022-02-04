@@ -4,11 +4,11 @@ import main.geometry.shapes.Point;
 
 import java.awt.*;
 
-public class Fractal {
+public class FractalManager {
     private FractalImage image;
     private FractalNode node;
 
-    public Fractal(int resolution, FractalNode node, double scaleCap) {
+    public FractalManager(int resolution, FractalNode node, double scaleCap) {
         this.image = new FractalImage(resolution, resolution, new Color(64, 64, 64), new Color(192, 192, 192), new Point());
         this.node = node;
         this.node.iterate(scaleCap, image);

@@ -3,8 +3,6 @@ package main;
 import main.fractal.*;
 import main.geometry.Matrix;
 
-import java.awt.*;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -28,7 +26,7 @@ public class Main {
                 {0, -2048, 2048},
                 {0, 0, 1}}), seed);
 
-        Fractal fractal = new Fractal(4096, node, 1);
+        FractalManager fractal = new FractalManager(4096, node, 1);
         fractal.upload("temp");
     }
 }
