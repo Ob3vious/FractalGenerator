@@ -9,7 +9,7 @@ public class FractalManager {
     private FractalNode node;
 
     public FractalManager(int resolution, FractalNode node, double scaleCap) {
-        this.image = new FractalImage(resolution, resolution, new Color(64, 64, 64), new Color(192, 192, 192), new Point());
+        this.image = new FractalImage(resolution, new Color(64, 64, 64), new Color(192, 192, 192), new Point());
         this.node = node;
         this.node.iterate(scaleCap, image);
     }

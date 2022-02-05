@@ -14,13 +14,15 @@ public class FractalImage {
     private BufferedImage img;
     private Graphics2D g;
     private Shape shape;
+    private int size;
 
-    public FractalImage(int width, int height, Color background, Color foreground, Shape shape) {
+    public FractalImage(int size, Color background, Color foreground, Shape shape) {
+        this.size = size;
         this.shape = shape;
-        this.img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        this.img = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
         this.g = img.createGraphics();
         g.setPaint(background);
-        g.fillRect(0, 0, width, height);
+        g.fillRect(0, 0, size, size);
         g.setPaint(foreground);
     }
 
@@ -29,7 +31,10 @@ public class FractalImage {
      * @param transform the transform to apply to the shape.
      */
     public void drawNode(Matrix transform) {
-        shape.drawTransform(g, transform);
+        shape.drawTransform(g, new Matrix(new double[][] {
+                {size/2.0, 0, size/2.0},
+                {0, -size/2.0, size/2.0},
+                {0, 0, 1}}).multiplyBy(transform));
     }
 
     /**
@@ -38,6 +43,6 @@ public class FractalImage {
      * @throws IOException the exception that is thrown if uploading went wrong
      */
     public void upload(String filename) throws IOException {
-        ImageIO.write(img, "PNG", new File("fractals\\" + filename + ".png"));
+        ImageIO.write(img, "PNG", new File("res\\" + filename + ".png"));
     }
 }
