@@ -59,4 +59,17 @@ public class Matrix {
                 this.get(0, 0) * this.get(1, 1)
                         - this.get(1, 0) * this.get(0, 1));
     }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < getHeight(); i++) {
+            s.append("[");
+            for (int j = 0; j < getWidth(); j++) {
+                s.append("[").append(get(i, j)).append("]");
+            }
+            s.append("]");
+        }
+        return s.toString();
+    }
 }
