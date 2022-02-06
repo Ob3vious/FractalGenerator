@@ -28,6 +28,16 @@ public class FractalNode {
             iterateSingle(seedling).iterate(scaleCap, image);
     }
 
+    public void iterate(double scaleCap, FractalView view) {
+        if (scaleCap > this.transform.getScalar()) {
+            view.drawNode(this.transform);
+            return;
+        }
+
+        for (Seedling seedling : seed.getSeedlings())
+            iterateSingle(seedling).iterate(scaleCap, view);
+    }
+
     private FractalNode iterateSingle(Seedling seedling) {
         Matrix newTransform = this.transform.multiplyBy(seedling.getTransform());
         Seed newSeed = seedling.getSeed();

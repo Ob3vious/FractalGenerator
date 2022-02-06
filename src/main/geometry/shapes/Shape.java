@@ -1,5 +1,6 @@
 package main.geometry.shapes;
 
+import javafx.scene.canvas.GraphicsContext;
 import main.geometry.Matrix;
 
 import java.awt.*;
@@ -12,4 +13,7 @@ public interface Shape {
      * @param transform the transform to draw at
      */
     void drawTransform(Graphics2D g, Matrix transform);
+
+    // canvas
+    void drawTransform(GraphicsContext g, Matrix transform);
 }
