@@ -12,7 +12,7 @@ import main.userinterface.textfields.IntegerField;
 import main.userinterface.textfields.DoubleField;
 import main.userinterface.textfields.NameField;
 
-public class ViewTab extends UITab implements UpdateCallback {
+public class ViewTab extends UITab {
     private HBox mainBox;
     private Canvas canvas;
     private VBox secondaryBox;
@@ -33,8 +33,7 @@ public class ViewTab extends UITab implements UpdateCallback {
 
     public ViewTab() {
         super("View");
-
-
+        
         seed = new Seed();
 
         seed.addSeedling(new Seedling(new Matrix(new double[][]{
@@ -92,10 +91,5 @@ public class ViewTab extends UITab implements UpdateCallback {
         mainBox = new HBox(canvas, secondaryBox);
 
         super.setContent(mainBox);
-    }
-
-    @Override
-    public void onUpdate() {
-
     }
 }
