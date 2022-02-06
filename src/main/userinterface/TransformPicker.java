@@ -2,16 +2,16 @@ package main.userinterface;
 
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import main.fractal.FractalView;
 import main.geometry.Matrix;
 import main.geometry.shapes.Rhomboid;
+import main.userinterface.textfields.DoubleField;
 
 public class TransformPicker implements UIContent, UpdateCallback {
-    private NumberField[] numberFields = new NumberField[6];
+    private DoubleField[] numberFields = new DoubleField[6];
     private HBox mainBox;
     private GridPane grid;
     private Canvas canvas;
@@ -22,7 +22,8 @@ public class TransformPicker implements UIContent, UpdateCallback {
 
         for (int i = 0; i < 6; i++) {
             //the formula constructs a identity matrix
-            numberFields[i] = new NumberField(64, 32, -2, 2, (i % 3 == 0 ? 1 : 0), this);
+            numberFields[i] = new DoubleField(64, 32, -2, 2, (i % 3 == 0 ? 1 : 0));
+            numberFields[i].setCallback(this);
             grid.add(numberFields[i].getContent(), i / 2, i % 2);
         }
 

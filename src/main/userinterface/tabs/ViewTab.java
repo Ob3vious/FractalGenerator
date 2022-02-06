@@ -6,11 +6,13 @@ import javafx.scene.layout.VBox;
 import main.fractal.*;
 import main.geometry.Matrix;
 import main.geometry.shapes.Rhomboid;
-import main.userinterface.HexField;
-import main.userinterface.TransformPicker;
-import main.userinterface.UIButton;
+import main.userinterface.*;
+import main.userinterface.textfields.HexField;
+import main.userinterface.textfields.IntegerField;
+import main.userinterface.textfields.DoubleField;
+import main.userinterface.textfields.NameField;
 
-public class ViewTab extends UITab {
+public class ViewTab extends UITab implements UpdateCallback {
     private HBox mainBox;
     private Canvas canvas;
     private VBox secondaryBox;
@@ -18,7 +20,11 @@ public class ViewTab extends UITab {
     private HBox colorBox;
     private HexField backgroundColor;
     private HexField foregroundColor;
-    private UIButton button;
+    private HBox resolutionBox;
+    private IntegerField imageSize;
+    private DoubleField scaleCapper;
+    private NameField imageName;
+    private UIButton viewButton;
 
     public ViewTab() {
         super("View");
@@ -26,19 +32,19 @@ public class ViewTab extends UITab {
 
         Seed seed = new Seed();
 
-        seed.addSeedling(new Seedling(new Matrix(new double[][] {
+        seed.addSeedling(new Seedling(new Matrix(new double[][]{
                 {0, -.25, 0},
                 {.75, 0, -.25},
                 {0, 0, 1}}), seed));
-        seed.addSeedling(new Seedling(new Matrix(new double[][] {
+        seed.addSeedling(new Seedling(new Matrix(new double[][]{
                 {0, .25, 0},
                 {-.75, 0, .25},
                 {0, 0, 1}}), seed));
-        seed.addSeedling(new Seedling(new Matrix(new double[][] {
+        seed.addSeedling(new Seedling(new Matrix(new double[][]{
                 {.5, 0, -.5},
                 {-.25, .5, 0},
                 {0, 0, 1}}), seed));
-        seed.addSeedling(new Seedling(new Matrix(new double[][] {
+        seed.addSeedling(new Seedling(new Matrix(new double[][]{
                 {.5, 0, .5},
                 {.25, .5, 0},
                 {0, 0, 1}}), seed));
@@ -52,18 +58,29 @@ public class ViewTab extends UITab {
         foregroundColor = new HexField(128, 32, "e0e0e0");
         colorBox = new HBox(backgroundColor.getContent(), foregroundColor.getContent());
 
-        button = new UIButton(256, 64, "Generate!");
-        button.setOnAction(event -> {
+        imageSize = new IntegerField(64, 32, 32, 4096, 512);
+        scaleCapper = new DoubleField(64, 32, 0.0005, 1, 0.25);
+        imageName = new NameField(128, 32, "fractal");
+        resolutionBox = new HBox(imageSize.getContent(), scaleCapper.getContent(), imageName.getContent());
+
+        viewButton = new UIButton(256, 64, "Generate!");
+        viewButton.setOnAction(event -> {
             FractalView view = new FractalView(canvas, backgroundColor.getColor(), foregroundColor.getColor(), new Rhomboid());
             Matrix m = transform.getMatrix();
             view.clear();
-            new FractalNode(m, seed).iterate(Math.pow(1.0/1024, 2), view);
+            new FractalNode(m, seed).iterate(scaleCapper.getValue() * Math.pow(1.0 / imageSize.getValue(), 2), view);
         });
 
-        secondaryBox = new VBox(transform.getContent(), colorBox, button.getContent());
+        secondaryBox = new VBox(transform.getContent(), colorBox, resolutionBox, viewButton.getContent());
+        secondaryBox.setSpacing(32);
 
         mainBox = new HBox(canvas, secondaryBox);
 
         super.setContent(mainBox);
+    }
+
+    @Override
+    public void onUpdate() {
+
     }
 }
