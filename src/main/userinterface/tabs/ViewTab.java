@@ -20,17 +20,22 @@ public class ViewTab extends UITab implements UpdateCallback {
     private HBox colorBox;
     private HexField backgroundColor;
     private HexField foregroundColor;
+    private UIButton viewButton;
+    private VBox exportMenu;
     private HBox resolutionBox;
     private IntegerField imageSize;
     private DoubleField scaleCapper;
     private NameField imageName;
-    private UIButton viewButton;
+    private UIButton exportButton;
+
+    private Seed seed;
+    private FractalView view;
 
     public ViewTab() {
         super("View");
 
 
-        Seed seed = new Seed();
+        seed = new Seed();
 
         seed.addSeedling(new Seedling(new Matrix(new double[][]{
                 {0, -.25, 0},
@@ -58,20 +63,30 @@ public class ViewTab extends UITab implements UpdateCallback {
         foregroundColor = new HexField(128, 32, "e0e0e0");
         colorBox = new HBox(backgroundColor.getContent(), foregroundColor.getContent());
 
+        view = new FractalView(canvas, new Rhomboid());
+
         imageSize = new IntegerField(64, 32, 32, 4096, 512);
         scaleCapper = new DoubleField(64, 32, 0.0005, 1, 0.25);
         imageName = new NameField(128, 32, "fractal");
         resolutionBox = new HBox(imageSize.getContent(), scaleCapper.getContent(), imageName.getContent());
-
-        viewButton = new UIButton(256, 64, "Generate!");
-        viewButton.setOnAction(event -> {
-            FractalView view = new FractalView(canvas, backgroundColor.getColor(), foregroundColor.getColor(), new Rhomboid());
+        exportButton = new UIButton(256, 64, "Export");
+        exportButton.setOnAction(event -> {
             Matrix m = transform.getMatrix();
-            view.clear();
-            new FractalNode(m, seed).iterate(scaleCapper.getValue() * Math.pow(1.0 / imageSize.getValue(), 2), view);
+            view.setColors(backgroundColor.getColor(), foregroundColor.getColor());
+            view.setNode(new FractalNode(m, seed));
+            System.out.println(view.export(imageSize.getValue(), scaleCapper.getValue() * Math.pow(1.0 / imageSize.getValue(), 2), imageName.getValue()));
+        });
+        exportMenu = new VBox(resolutionBox, exportButton.getContent());
+
+        viewButton = new UIButton(256, 64, "Generate");
+        viewButton.setOnAction(event -> {
+            Matrix m = transform.getMatrix();
+            view.setColors(backgroundColor.getColor(), foregroundColor.getColor());
+            view.setNode(new FractalNode(m, seed));
+            view.draw(0.25 * Math.pow(1.0 / 512, 2));
         });
 
-        secondaryBox = new VBox(transform.getContent(), colorBox, resolutionBox, viewButton.getContent());
+        secondaryBox = new VBox(transform.getContent(), colorBox, viewButton.getContent(), exportMenu);
         secondaryBox.setSpacing(32);
 
         mainBox = new HBox(canvas, secondaryBox);

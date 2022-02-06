@@ -14,7 +14,7 @@ public class NameField extends UITextField {
         }
     }
 
-    String getValue() {
+    public String getValue() {
         return value;
     }
 }

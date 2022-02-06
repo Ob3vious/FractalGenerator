@@ -28,7 +28,8 @@ public class TransformPicker implements UIContent, UpdateCallback {
         }
 
         canvas = new Canvas(64, 64);
-        view = new FractalView(canvas, Color.valueOf("202020"), Color.valueOf("e0e0e0"), new Rhomboid());
+        view = new FractalView(canvas, new Rhomboid());
+        view.setColors(Color.valueOf("202020"), Color.valueOf("e0e0e0"));
 
         mainBox = new HBox(grid, canvas);
 
