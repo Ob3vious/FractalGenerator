@@ -12,6 +12,7 @@ import main.fractal.*;
 import main.geometry.Matrix;
 import main.geometry.shapes.Point;
 import main.geometry.shapes.Rhomboid;
+import main.userinterface.ColorPicker;
 import main.userinterface.TransformPicker;
 import main.userinterface.UIButton;
 
@@ -22,6 +23,8 @@ public class ViewTab extends UITab {
     private Canvas canvas;
     private VBox secondaryBox;
     private TransformPicker transform;
+    private ColorPicker backgroundColor;
+    private ColorPicker foregroundColor;
     private UIButton button;
 
     public ViewTab() {
@@ -50,15 +53,19 @@ public class ViewTab extends UITab {
         canvas = new Canvas(512, 512);
 
         transform = new TransformPicker();
+
+        backgroundColor = new ColorPicker(288);
+        foregroundColor = new ColorPicker(288);
+
         button = new UIButton(288, 64, "Generate!");
-        FractalView view = new FractalView(canvas, new Color(0.125, 0.125, 0.125, 1), new Color(0.875, 0.875, 0.875, 1), new Rhomboid());
         button.setOnAction(event -> {
+            FractalView view = new FractalView(canvas, backgroundColor.getColor(), foregroundColor.getColor(), new Rhomboid());
             Matrix m = transform.getMatrix();
             view.clear();
             new FractalNode(m, seed).iterate(Math.pow(1.0/1024, 2), view);
         });
 
-        secondaryBox = new VBox(transform.getContent(), button.getContent());
+        secondaryBox = new VBox(transform.getContent(), backgroundColor.getContent(), foregroundColor.getContent(), button.getContent());
 
         mainBox = new HBox(canvas, secondaryBox);
 
