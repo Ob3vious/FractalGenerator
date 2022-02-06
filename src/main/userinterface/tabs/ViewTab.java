@@ -48,11 +48,11 @@ public class ViewTab extends UITab {
         transform = new TransformPicker();
 
 
-        backgroundColor = new HexField(144, 32, "202020");
-        foregroundColor = new HexField(144, 32, "e0e0e0");
+        backgroundColor = new HexField(128, 32, "202020");
+        foregroundColor = new HexField(128, 32, "e0e0e0");
         colorBox = new HBox(backgroundColor.getContent(), foregroundColor.getContent());
 
-        button = new UIButton(288, 64, "Generate!");
+        button = new UIButton(256, 64, "Generate!");
         button.setOnAction(event -> {
             FractalView view = new FractalView(canvas, backgroundColor.getColor(), foregroundColor.getColor(), new Rhomboid());
             Matrix m = transform.getMatrix();

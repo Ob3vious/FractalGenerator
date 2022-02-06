@@ -12,7 +12,9 @@ public class NumberField implements UIContent {
     private double min;
     private double max;
 
-    public NumberField(int width, int height, double min, double max, double initialValue) {
+    private UpdateCallback callback;
+
+    public NumberField(int width, int height, double min, double max, double initialValue, UpdateCallback callback) {
         value = "0";
         input = new TextField("" + initialValue);
         input.setPrefSize(width, height);
@@ -26,6 +28,9 @@ public class NumberField implements UIContent {
 
         this.min = min;
         this.max = max;
+
+        this.callback = callback;
+
         validate();
     }
 
@@ -47,6 +52,7 @@ public class NumberField implements UIContent {
                 value = input.getText();
             }
         }
+        callback.onUpdate();
     }
 
     public double getValue() {
