@@ -7,11 +7,12 @@ import java.awt.*;
 public class FractalManager {
     private FractalImage image;
     private FractalNode node;
+    private double scaleCap;
 
     public FractalManager(int resolution, FractalNode node, double scaleCap) {
         this.image = new FractalImage(resolution, new Color(64, 64, 64), new Color(192, 192, 192), new Point());
+        this.scaleCap = scaleCap;
         this.node = node;
-        this.node.iterate(scaleCap, image);
     }
 
     /**
@@ -20,6 +21,7 @@ public class FractalManager {
      * @param filename the name of the image file
      */
     public void upload(String filename) {
+        this.node.iterate(scaleCap, image);
         try {
             this.image.upload(filename);
             System.out.println("Upload successful");
