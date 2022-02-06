@@ -13,7 +13,8 @@ public class TransformPicker implements UIContent {
         grid = new GridPane();
 
         for (int i = 0; i < 6; i++) {
-            numberFields[i] = new NumberField(96, 32, -2, 2, 0);
+            //the formula constructs a identity matrix
+            numberFields[i] = new NumberField(96, 32, -2, 2, (i % 3 == 0 ? 1 : 0));
         }
 
         for (int i = 0; i < 6; i++) {

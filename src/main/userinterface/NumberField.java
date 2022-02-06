@@ -34,7 +34,7 @@ public class NumberField implements UIContent {
             input.setText("0");
         } else {
             try {
-                double newValue = Math.round(Double.parseDouble(input.getText()) * 10000) / 10000.0;
+                double newValue = Math.round(Double.parseDouble(input.getText()) * 1000) / 1000.0;
                 if (!(newValue >= min && newValue <= max)) {
                     input.setText(value);
                 } else {
@@ -50,9 +50,6 @@ public class NumberField implements UIContent {
     }
 
     public double getValue() {
-        if (input.getText().isEmpty()) {
-            input.setText("0.0");
-        }
         return Double.parseDouble(input.getText());
     }
 
