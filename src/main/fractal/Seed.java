@@ -13,6 +13,10 @@ public class Seed {
         this.seedlings.add(seedling);
     }
 
+    public void empty() {
+        seedlings = new ArrayList<>();
+    }
+
     public ArrayList<Seedling> getSeedlings() {
         return seedlings;
     }

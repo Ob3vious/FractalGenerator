@@ -16,7 +16,7 @@ public class ViewTab extends UITab {
     private HBox mainBox;
     private Canvas canvas;
     private VBox secondaryBox;
-    private TransformPicker transform;
+    private MatrixBuilder transform;
     private HBox colorBox;
     private HexField backgroundColor;
     private HexField foregroundColor;
@@ -55,7 +55,7 @@ public class ViewTab extends UITab {
 
         canvas = new Canvas(512, 512);
 
-        transform = new TransformPicker();
+        transform = new MatrixBuilder();
 
 
         backgroundColor = new HexField(128, 32, "202020");

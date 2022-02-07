@@ -11,10 +11,11 @@ public class UserInterface extends Application {
 
     @Override
     public void start(Stage stage) {
-        UIContent uiContent = new TabViewer(new ViewTab().getContent());
+        UIContent uiContent = new TabViewer(new BuildTab().getContent(), new ViewTab().getContent());
         Scene scene = new Scene((Parent) uiContent.getContent());
         stage.setScene(scene);
         stage.setTitle("Fractal Generator");
+        stage.setResizable(false);
         stage.show();
     }
 }

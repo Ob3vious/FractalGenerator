@@ -10,14 +10,14 @@ import main.geometry.Matrix;
 import main.geometry.shapes.Rhomboid;
 import main.userinterface.textfields.DoubleField;
 
-public class TransformPicker implements UIContent, UpdateCallback {
+public class MatrixBuilder implements UIContent, UpdateCallback {
     private DoubleField[] numberFields = new DoubleField[6];
     private HBox mainBox;
     private GridPane grid;
     private Canvas canvas;
     private FractalView view;
 
-    public TransformPicker() {
+    public MatrixBuilder() {
         grid = new GridPane();
 
         for (int i = 0; i < 6; i++) {
