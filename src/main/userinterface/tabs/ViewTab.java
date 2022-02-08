@@ -73,7 +73,9 @@ public class ViewTab extends UITab {
             Matrix m = transform.getMatrix();
             view.setColors(backgroundColor.getColor(), foregroundColor.getColor());
             view.setNode(new FractalNode(m, seed));
-            System.out.println(view.export(imageSize.getValue(), scaleCapper.getValue() * Math.pow(1.0 / imageSize.getValue(), 2), imageName.getValue()));
+            if(view.export(imageSize.getValue(), scaleCapper.getValue() * Math.pow(1.0 / imageSize.getValue(), 2), imageName.getValue())) {
+                System.out.println("Upload as " + imageName.getValue() + ".png successful!");
+            }
         });
         exportMenu = new VBox(resolutionBox, exportButton.getContent());
 
@@ -91,5 +93,9 @@ public class ViewTab extends UITab {
         mainBox = new HBox(canvas, secondaryBox);
 
         super.setContent(mainBox);
+    }
+
+    public void setSeed(Seed seed) {
+        this.seed = seed;
     }
 }

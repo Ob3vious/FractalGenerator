@@ -18,4 +18,9 @@ public class Seedling {
     public Seed getSeed() {
         return seed;
     }
+
+    @Override
+    public String toString() {
+        return transform.toString();
+    }
 }

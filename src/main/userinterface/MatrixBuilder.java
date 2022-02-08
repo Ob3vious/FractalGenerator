@@ -17,6 +17,8 @@ public class MatrixBuilder implements UIContent, UpdateCallback {
     private Canvas canvas;
     private FractalView view;
 
+    private UpdateCallback callback;
+
     public MatrixBuilder() {
         grid = new GridPane();
 
@@ -43,6 +45,10 @@ public class MatrixBuilder implements UIContent, UpdateCallback {
                 {0, 0, 1}});
     }
 
+    public void setCallback(UpdateCallback callback) {
+        this.callback = callback;
+    }
+
     @Override
     public Node getContent() {
         return mainBox;
@@ -54,5 +60,7 @@ public class MatrixBuilder implements UIContent, UpdateCallback {
             view.clear();
             view.drawNode(getMatrix());
         }
+        if (callback != null)
+            callback.onUpdate();
     }
 }

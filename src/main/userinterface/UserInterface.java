@@ -11,8 +11,17 @@ public class UserInterface extends Application {
 
     @Override
     public void start(Stage stage) {
-        UIContent uiContent = new TabViewer(new BuildTab().getContent(), new ViewTab().getContent());
-        Scene scene = new Scene((Parent) uiContent.getContent());
+        BuildTab build = new BuildTab();
+        ViewTab view = new ViewTab();
+        TabViewer tabViewer = new TabViewer(build.getContent(), view.getContent());
+
+        build.getContent().selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                view.setSeed(build.getSeed());
+            }
+        });
+
+        Scene scene = new Scene((Parent) tabViewer.getContent());
         stage.setScene(scene);
         stage.setTitle("Fractal Generator");
         stage.setResizable(false);

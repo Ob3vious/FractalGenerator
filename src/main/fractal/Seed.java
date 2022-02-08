@@ -20,4 +20,9 @@ public class Seed {
     public ArrayList<Seedling> getSeedlings() {
         return seedlings;
     }
+
+    @Override
+    public String toString() {
+        return seedlings.toString();
+    }
 }
