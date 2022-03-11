@@ -2,7 +2,6 @@ fractals/*
 
 .idea
 out
-src/META-INF
 
 # Compiled class file
 *.class
