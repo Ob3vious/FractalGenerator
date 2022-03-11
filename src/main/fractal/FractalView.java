@@ -5,6 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import main.geometry.Matrix;
 import main.geometry.shapes.Shape;
 
@@ -40,6 +41,8 @@ public class FractalView {
         g.setFill(background);
         g.fillRect(0, 0, size, size);
         g.setFill(foreground);
+        g.setStroke(foreground);
+        g.setLineWidth(2);
     }
 
     public void setNode(FractalNode node) {

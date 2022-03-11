@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import main.fractal.FractalView;
 import main.geometry.Matrix;
+import main.geometry.shapes.QuestionBox;
 import main.geometry.shapes.Rhomboid;
 import main.userinterface.textfields.DoubleField;
 
@@ -30,7 +31,7 @@ public class MatrixBuilder implements UIContent, UpdateCallback {
         }
 
         canvas = new Canvas(64, 64);
-        view = new FractalView(canvas, new Rhomboid());
+        view = new FractalView(canvas, new QuestionBox());
         view.setColors(Color.valueOf("202020"), Color.valueOf("e0e0e0"));
 
         mainBox = new HBox(grid, canvas);

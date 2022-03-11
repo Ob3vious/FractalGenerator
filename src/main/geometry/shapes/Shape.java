@@ -12,8 +12,5 @@ public interface Shape {
      * @param g         the image to draw on
      * @param transform the transform to draw at
      */
-    void drawTransform(Graphics2D g, Matrix transform);
-
-    // canvas
     void drawTransform(GraphicsContext g, Matrix transform);
 }
