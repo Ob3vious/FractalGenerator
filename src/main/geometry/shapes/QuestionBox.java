@@ -32,6 +32,6 @@ public class QuestionBox implements Shape {
         g.bezierCurveTo(p5.getX(), p5.getY(), p6.getX(), p6.getY(), p7.getX(), p7.getY());
         g.stroke();
 
-        g.strokeOval(p8.getX() - 0.5, p8.getY() - 0.5, 1, 1);
+        g.fillOval(p8.getX() - 1, p8.getY() - 1, 2, 2);
     }
 }
