@@ -3,6 +3,7 @@ package main.userinterface;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.userinterface.tabs.UITab;
 import main.userinterface.tabs.*;
@@ -25,6 +26,7 @@ public class UserInterface extends Application {
         stage.setScene(scene);
         stage.setTitle("Fractal Generator");
         stage.setResizable(false);
+        stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon.png")));
         stage.show();
     }
 }
